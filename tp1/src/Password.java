@@ -1,5 +1,6 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Password {
             }
         }
 
-        return isUpper && isDigi;
+        return isUpper & isDigi;
     }
 
     /**
@@ -100,9 +101,14 @@ public class Password {
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
 
-        // Code here
+        HashMap<String, Boolean> isStrongHashMap = new HashMap<String, Boolean>();
 
-        return null;
+        for(int i = 0; i < passwords.size(); i++){
+            isStrongHashMap.put(passwords.get(i),isStrongPassword(passwords.get(i)));
+        }
+
+
+        return isStrongHashMap;
     }
 
     /**
@@ -119,7 +125,27 @@ public class Password {
      */
     public static String generatePassword(int nbCar) {
 
-        // Code here
+        if (nbCar > 4) {
+            String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String lower = "abcdefghijklmnopqrstuvwxyz";
+            String digit = "0123456789";
+            String special = ".+-[]*~_#:?";
+            String all = upper + lower + digit + special;
+
+            String password = "";
+
+            SecureRandom random = new SecureRandom();
+            password = password + upper.charAt(random.nextInt(27))+
+             lower.charAt(random.nextInt(27)) +
+             digit.charAt(random.nextInt(11)) +
+             special.charAt(random.nextInt(12));
+
+            for(int i = 0;i<nbCar;i++){
+                password = password + lower.charAt(random.nextInt(74));
+            }
+
+            return password;
+        }
 
         return null;
     }
