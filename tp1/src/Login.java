@@ -10,8 +10,18 @@ public class Login {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-
-            // Code here
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            scanner.close();
+            if (null != userDatabase.get(username)) {
+                Scanner scanner2 = new Scanner(System.in);
+                System.out.print("Enter password: ");
+                String password = scanner2.nextLine();
+                scanner2.close();
+                if (Password.hashPassword(password) == userDatabase.get(username)) {
+                    System.out.println("Login successful!");
+                }
+            }
         }
     }
 
