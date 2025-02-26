@@ -19,7 +19,6 @@ public class Login {
                     System.out.println("Login successful!");
                 }
             }
-            scanner.close();
         }
     }
 
